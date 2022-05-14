@@ -21,14 +21,14 @@ import time
 import tornado.escape
 import tornado.ioloop
 import tornado.web
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import json
 import random
 import smtplib
-import ConfigParser
+import configparser
 import requests
 from collections import OrderedDict
-import thread
+import _thread
 import hashlib
 import sqlite3
 
@@ -265,7 +265,7 @@ class ElasticHoneyPy:
                     server.sendmail(fromEmail, toEmail, msg)
                     validSends.append(toEmail)
                 server.quit()
-            except Exception, e:
+            except Exception as e:
                 self.webserver.log("Failed to send email due to exception: %s" % str(e), RED)
 
             if len(validSends) > 0:
@@ -288,7 +288,7 @@ class ElasticHoneyPy:
                                                    filename,
                                                    fileSaves))
                 self.webserver.db.commit()
-            except Exception, e:
+            except Exception as e:
                 self.webserver.log("Exception (%s) in recordEvent" % str(e), RED)
 
         # handler for basic recon requests
@@ -304,7 +304,7 @@ class ElasticHoneyPy:
         # handler for attack commands (those requests with "exec(" in them
         def HandleAttackEvent(self, request):
             # this is threaded because if there is a file download it could block for a while
-            thread.start_new_thread(self.HandleAttackEventThread, (request,))
+            _thread.start_new_thread(self.HandleAttackEventThread, (request,))
 
         # sub-handler for download commands
         def HandleDownloadCommand(self, eventTime, cmd, request):
@@ -334,7 +334,7 @@ class ElasticHoneyPy:
                     filename = "%s_%s_%s" % (request.remote_ip, sha256, eventTime.isoformat().replace(":", "_"))
                     open(filename, "wb").write(exe)
                     self.webserver.log("File %s saved to disk" % filename, GREEN)
-                except Exception, e:
+                except Exception as e:
                     self.webserver.log("Exception trying to download %s: %s" % (url, str(e)), RED)
                     fileDownloaded = False
 
@@ -354,7 +354,7 @@ class ElasticHoneyPy:
             # see if we have an attack command
             uri = request.uri
             if uri.startswith("/_search?source="):  # embedded command
-                uri = urllib.unquote(uri[16:])
+                uri = urllib.parse.unquote(uri[16:])
                 cmdStartPos = uri.find(".exec(\\\"")  # find start of the exec command
                 if cmdStartPos > 0:
                     cmdStartPos += 8
@@ -393,7 +393,7 @@ class ElasticHoneyPy:
 
     def __init__(self, configfile):
         # load the configuration file
-        self.config = ConfigParser.RawConfigParser(dict_type=OrderedMultisetDict)
+        self.config = configparser.RawConfigParser(dict_type=OrderedMultisetDict)
         self.config.read([configfile])
 
         # access the database
@@ -428,7 +428,7 @@ class ElasticHoneyPy:
     def log(self, entry, color=BLACK):
         colorStart = COLOR_SEQ % (30 + color)
         colorEnd = RESET_SEQ
-        print "%s[%s] %s%s" % (colorStart, datetime.datetime.now().isoformat(), entry, colorEnd)
+        print("%s[%s] %s%s" % (colorStart, datetime.datetime.now().isoformat(), entry, colorEnd))
 
     # call this to make the magic!
     def run(self):
