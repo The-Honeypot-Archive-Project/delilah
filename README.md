@@ -4,7 +4,7 @@ Delilah is a honeypot designed to attract attackers who are actively exploiting 
 
 ## Introduction
 
-Delilah acts as a vulnerable Elasticsearch instance that detects and identifies attack commands, recon attempts, and download commands (specifically "wget" and "curl"). The main features of Delilah are:
+Delilah acts as a vulnerable Elasticsearch instance that detects and identifies attack commands, recon attempts, and download commands (specifically "wget" and "curl"). The original research and honeypot implementation was done by Novetta[^3]. The main features of Delilah are:
 - Delilah will attempt to download the file the attacker is attempting to introduce on a victim's system to allow analysts the opportunity to analyze the files at a later date. 
 - Email notifications are sent to alert analysts in real-time of incoming attacks.
 - Delilah provides a variety of configurable parameters to mimic Elasticsearch instances and prevent an attacker from easily determining that they are interacting with a honeypot. 
@@ -68,3 +68,4 @@ Delilah and Delilah Monitor are licensed under the Apache v2 license.
 ## References
 [^1]: MITRE CVE - CVE-2015-1427, [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1427](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1427). Accessed on 05/14/2022.
 [^2]: jordan-wright/elastichoney: A Simple Elasticsearch Honeypot, [https://github.com/jordan-wright/elastichoney](https://github.com/jordan-wright/elastichoney). Accessed on 05/14/2022.
+[^3]: The Elastic Botnet Report, Novetta, [https://www.novetta.com/wp-content/uploads/2015/06/NTRG_ElasticBotnetReport_06102015.pdf](https://www.novetta.com/wp-content/uploads/2015/06/NTRG_ElasticBotnetReport_06102015.pdf). Accessed on 05/14/2022.
