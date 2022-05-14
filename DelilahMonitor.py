@@ -21,7 +21,7 @@ import tornado.escape
 import tornado.ioloop
 import tornado.web
 import json
-import ConfigParser
+import configparser
 import requests
 from collections import OrderedDict
 
@@ -67,8 +67,8 @@ class sensorMonitor:
                     r = requests.get(url, timeout=sensors[sensor]['timeout'])
                     datablob = r.content
                     events = json.loads(datablob)
-                except Exception, e:
-                    print "Exception (%s) trying to query %s" % (str(e), sensor)
+                except Exception as e:
+                    print("Exception (%s) trying to query %s" % (str(e), sensor))
                     continue
 
                 # set the sensor as online
@@ -110,7 +110,7 @@ class sensorMonitor:
                     try:
                         timestamp = datetime.datetime.fromtimestamp(int(row[1])).isoformat()
                     except:
-                        print "Invalid datetime detected: %s. Be warned!" % row[1]
+                        print("Invalid datetime detected: %s. Be warned!" % row[1])
                     color = "#FFFFFF"
                     if row[4] == "Download":
                         color = "#FF0000"
@@ -155,7 +155,7 @@ class sensorMonitor:
     def __init__(self, configfile):
 
         # load the configuration file
-        self.config = ConfigParser.RawConfigParser(dict_type=OrderedMultisetDict)
+        self.config = configparser.RawConfigParser(dict_type=OrderedMultisetDict)
         self.config.read([configfile])
 
         # initialize the webpage handlers
@@ -165,7 +165,7 @@ class sensorMonitor:
 
         # initialize the listening port
         self.port = int(self.config.get("webui", "port")[0])
-        print "Listening on port %d" % self.port
+        print("Listening on port %d" % self.port)
         self.application.listen(self.port)
 
     # call this to make the magic!
