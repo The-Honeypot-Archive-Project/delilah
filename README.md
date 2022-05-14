@@ -1,4 +1,4 @@
-# Delilah Honeypot by Novetta
+# Delilah Honeypot (originally by Novetta)
 
 Delilah is a honeypot designed to attract attackers who are actively exploiting the Elasticsearch Groovy vulnerability (CVE-2015-1427)[^1].
 
