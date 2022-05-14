@@ -48,6 +48,23 @@ screen -d -m -S delilah python3 Delilah.py
 screen -r delilah
 ```
 
+### Run Delilah using Docker
+
+It is possible to run Delilah using the honeypot image in Dockerhub. 
+
+```bash
+# go to the honeypot repository
+cd honeypot_delilah/
+
+# we assume the Delilah.ini file was updated
+
+# create an empty esevents.sqlite to map it to the container in order to have persistent storage of the results
+touch $(pwd)/esevents.sqlite
+
+# run the docker container in daemon mode
+docker container run -d -name honeypotDelilah -v $(pwd)/Delilah.ini:/delilah/Delilah.ini:ro -v $(pwd)/esevents.sqlite:/delilah/esevents.sqlite -p 9200:9200 verovaleros/honeypotDelilah:latest
+```
+
 ## Delilah Monitor
 
 The Delilah Monitor is a simple web interface that will query each of the specified Delilah nodes and produce a chronological event view for the entire sensor collection. A configuration file is needed for the monitor to work.
