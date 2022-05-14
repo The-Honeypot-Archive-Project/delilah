@@ -1,4 +1,6 @@
 # Delilah Honeypot (originally by Novetta)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/verovaleros/honeypot_delilah)
+![GitHub last commit (branch)](https://img.shields.io/badge/python-3.8.10-brightgreen)
 
 Delilah is a honeypot designed to attract attackers who are actively exploiting the Elasticsearch Groovy vulnerability (CVE-2015-1427)[^1].
 
