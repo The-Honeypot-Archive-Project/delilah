@@ -31,10 +31,10 @@ The following packages are required in order for Delilah and the Delilah Monitor
 
 The `Delilah.ini` file contains the configuration for the Delilah honeypot. This file is required for the honeypot to run. The configuration file has four sections:
 
-- [notifications]: email addresses that will receive the honeypot notifications. Required. For each user that will receive an email notification of a Delilah event there must be an "email:" entry.
-- [emailacct]: information of the email account that will send the notifications. Required.
-- [honeypot]: configuration of the honeypot. Default values can be used for testing.
-- [data]: configuration of the honeypot data storage. Default values can be used for testing.
+- `[notifications]`: email addresses that will receive the honeypot notifications. For each user that will receive an email notification of a Delilah event there must be an "email:" entry. If left unfilled, Delilah will throw an exception but will still work.
+- `[emailacct]`: information of the email account that will send the notifications. If left unfilled, Delilah will throw an exception but will still work.
+- `[honeypot]`: configuration of the honeypot. Default values can be used for testing.
+- `[data]`: configuration of the honeypot data storage. Default values can be used for testing.
 
 ### Run Delilah
 
