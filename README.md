@@ -62,7 +62,7 @@ cd honeypot_delilah/
 touch $(pwd)/esevents.sqlite
 
 # run the docker container in daemon mode
-docker container run -d -name honeypotDelilah -v $(pwd)/Delilah.ini:/delilah/Delilah.ini:ro -v $(pwd)/esevents.sqlite:/delilah/esevents.sqlite -p 9200:9200 verovaleros/honeypotDelilah:latest
+docker container run -d --name honeypotDelilah -v $(pwd)/Delilah.ini:/delilah/Delilah.ini:ro -v $(pwd)/esevents.sqlite:/delilah/esevents.sqlite -p 9200:9200 verovaleros/delilah:latest
 ```
 
 ## Delilah Monitor
@@ -76,6 +76,11 @@ Delilah Monitor is configured via the DelilahMonitor.ini file. For each honeypot
 To activate the Delilah Monitor, issue the following command:
 
 ```bash
+# create a copy of the configuration file
+cp DelilahMonitor.template.ini DelilahMonitor.ini
+
+# edit the file with your information
+
 # run delilah monitor in a screen
 screen -d -m -S monitor python3 DelilahMonitor.py
 
