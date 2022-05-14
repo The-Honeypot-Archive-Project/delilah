@@ -16,53 +16,42 @@ Delilah was inspired by Jordan Wright’s Elastichoney [^2].
 
 ## Installation
 
-Delilah has only a few external dependencies. The following packages are required in order for Delilah and the Delilah Monitor to operate:
+### Dependencies
 
-* sqlite3 (apt install -y sqlite3)
-* tornado (pip install tornado)
-* requests (pip install requests)
+The following packages are required in order for Delilah and the Delilah Monitor to operate: sqlite3, tornado, requests. Install the required dependencies with:
 
-For Linux systems, screen is recommended since Delilah does not run as a daemon and will terminate if a terminal is lost.
-
-Delilah requires a few configuration parameters to be set prior to activation. The Delilah.ini file contains the configuration for the Delilah honeypot (if the file is missing, Delilah will not run). For testing it is fine to leave the [honeypot] and [data] sections as their default values. However, the [emailacct] and [notifications] must be configured to avoid errors. 
-
-```
-[notifications]
-email: user@example.com				        ; there can be as many users or as few users as needed
-email: user2@example.com			        ; simply add or remove "email:" entries as necessary
-
-[emailacct]
-username: reportingaccount@example.com		; login name for Delilah to log with to send email
-password: youneedapassword					; password for the email account
-server: smtp.example.com:587				; email server and port
-from: reportingaccount@example.com			; the email address from which the notifications will arrive
+```bash
+  apt install -y sqlite3
+  pip install -r requirements.txt
 ```
 
-For each user that will receive an email notification of a Delilah event there must be an "email:" entry. If only one user will be notified of events, the second entry should be removed. If more than two users will receive the events, additional "email:" entries must be added. The [emailacct] section contains the information necessary to send the email. Note that the username and passwords are stored in plaintext therefore it is extremely important that access to the Delilah.ini file be restricted and the server upon which it is housed is secure. 
+### Configuration
 
-To activate Delilah simply issue the command:
+The `Delilah.ini` file contains the configuration for the Delilah honeypot. This file is required for the honeypot to run. The configuration file has four sections:
 
-```
-python Delilah.py
-```
+- [notifications]: email addresses that will receive the honeypot notifications. Required. For each user that will receive an email notification of a Delilah event there must be an "email:" entry.
+- [emailacct]: information of the email account that will send the notifications. Required.
+- [honeypot]: configuration of the honeypot. Default values can be used for testing.
+- [data]: configuration of the honeypot data storage. Default values can be used for testing.
 
-Delilah Monitor is configured via the DelilahMonitor.ini file. This package provides a template (DelilahMonitor.template.ini) that one can use to construct their own DelilahMonitor.ini configuration file. The configuration of Delilah Monitor is relatively straighforward. For each Delilah sensor an analyst will be monitoring, a "sensor:" entry within the [sensors] section must exist. The name of the sensor given in a "sensor:" entry is the basis for the section that defines the sensor. For example, if the following line exists within the [sensors] section:
+### Run Delilah
 
-```
-sensor: atlantic
-```
+For Linux systems, screen is recommended since Delilah does not run as a daemon and will terminate if a terminal is lost. To activate Delilah simply issue the command:
 
-then there must be a corresponding [atlantic] section within the configuration file. Each sensor section takes the following form:
+```bash
+screen -d -m -S delilah python3 Delilah.py
 
-```
-[{sensor1name}]													; This subsection must match the name of one and only one of the `sensor:` fields
-ip: {IP address of sensor1 ... do not include :9200}
-timeout: {Seconds to wait for a response}
-location: {Geographical location or some other identifier for the sensor}
-statusURI: {URI to access to pull down intel from sensor}
+# to attach to the running screen
+screen -r delilah
 ```
 
-The "ip:" field specifies the IP address of the sensor, "timeout:" specifies how long Delilah Monitor will wait before giving up on connecting to the sensor, "location:" is an arbitrary string that specifies the location of the sensor or some other identifying feature, and "statusURI:" must match the "statusURI:" within the Delilah.ini for the sensor. 
+### Delilah Monitor
+
+The Delilah Monitor is a simple web interface that will query each of the specified Delilah nodes and produce a chronological event view for the entire sensor collection. A configuration file is needed for the monitor to work.
+
+
+Delilah Monitor is configured via the DelilahMonitor.ini file. For each honeypot sensor to monitor, a `sensor:` entry within the [sensors] section must exist. This package provides a template (DelilahMonitor.template.ini) that one can use to construct their own DelilahMonitor.ini configuration file.
+
 
 To activate the Delilah Monitor, issue the following command:
 
