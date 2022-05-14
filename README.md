@@ -41,13 +41,14 @@ The `Delilah.ini` file contains the configuration for the Delilah honeypot. This
 For Linux systems, screen is recommended since Delilah does not run as a daemon and will terminate if a terminal is lost. To activate Delilah simply issue the command:
 
 ```bash
+# run delilah in a screen
 screen -d -m -S delilah python3 Delilah.py
 
 # to attach to the running screen
 screen -r delilah
 ```
 
-### Delilah Monitor
+## Delilah Monitor
 
 The Delilah Monitor is a simple web interface that will query each of the specified Delilah nodes and produce a chronological event view for the entire sensor collection. A configuration file is needed for the monitor to work.
 
@@ -57,11 +58,22 @@ Delilah Monitor is configured via the DelilahMonitor.ini file. For each honeypot
 
 To activate the Delilah Monitor, issue the following command:
 
-```
-python DelilahMonitor.py
+```bash
+# run delilah monitor in a screen
+screen -d -m -S monitor python3 DelilahMonitor.py
+
+# to attach to the running screen
+screen -r monitor
 ```
 
-Note that Delilah Monitor has no authentication mechanism. Simply navigating to the IP address and port (as specified by the "port:" entry of [webui]) of the Delilah Monitor instance will display the events of all configured sensors. It is recommended that the Delilah Monitor be run locally or be bound to a loopback device, but never exposed directly to the Internet to avoid exposing your sensor network.
+*Note: the Delilah Monitor has no authentication mechanism. Simply navigating to the IP address and port (as specified by the "port:" entry of [webui]) of the Delilah Monitor instance will display the events of all configured sensors. It is recommended that the Delilah Monitor be run locally or be bound to a loopback device, but never exposed directly to the Internet to avoid exposing your sensor network.*
+
+## Exploiting CVE-2015-1427
+
+To test the setup is working you can try the HTTP query specified in [^3], replacing the server address with the IP address of the honeypot, and the command with a command to execute. If the attempt was successful, Dalilah Monitor will show the attempt in the web as shown below:
+
+![dalilah-monitor-example-1](https://user-images.githubusercontent.com/2458879/168423981-6f4fa44e-1a11-4c73-b8be-43a9abbb4ab0.png)
+
 
 ## License
 
