@@ -1,25 +1,24 @@
-Delilah Honeypot by Novetta
-===========================
+# Delilah Honeypot by Novetta
 
-Introduction
-------------
-Delilah is a honeypot system inspired by Jordan Wright’s Elastichoney (https://github.com/jordan-wright/elastichoney) that is designed to attract attackers who are actively exploiting the Elasticsearch Groovy vulnerability (http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=2015-1427). Delilah acts as a vulnerable Elasticsearch instance that detects and identifies attack commands, recon attempts, and download commands (specifically "wget" and "curl"). Whenever an attacker issues a download command, Delilah will attempt to download the file the attacker is attempting to introduce on a victim's system to allow analysts the opportunity to analyze the files at a later date. Whenever Delilah detects an attacker's commands, a notification email is sent to one or more email addresses in order to alert analysts in real-time of incoming attacks.
+Delilah is a honeypot designed to attract attackers who are actively exploiting the Elasticsearch Groovy vulnerability (CVE-2015-1427)[^1].
 
-Delilah provides a variety of configurable parameters to mimic Elasticsearch instances and prevent an attacker from easily determining that they are interacting with a honeypot. 
+## Introduction
 
-Multiple Delilah nodes can be installed to form a network of sensors. To more easily view the sensor network, analysts should use the Delilah Monitor. The Delilah Monitor is a simple web interface that will query each of the specified Delilah nodes and produce a chronological event view for the entire sensor collection. Delilah Monitor can also be used for a single node if a larger sensor network is not desired.
+Delilah acts as a vulnerable Elasticsearch instance that detects and identifies attack commands, recon attempts, and download commands (specifically "wget" and "curl"). The main features of Delilah are:
+- Delilah will attempt to download the file the attacker is attempting to introduce on a victim's system to allow analysts the opportunity to analyze the files at a later date. 
+- Email notifications are sent to alert analysts in real-time of incoming attacks.
+- Delilah provides a variety of configurable parameters to mimic Elasticsearch instances and prevent an attacker from easily determining that they are interacting with a honeypot. 
+- Multiple Delilah nodes can be installed to form a network of sensors.
+- The Delilah Monitor is a simple web interface that will query each of the specified Delilah nodes and produce a chronological event view for the entire sensor collection. Delilah Monitor can also be used for a single node if a larger sensor network is not desired.
+-  Delilah and Delilah Monitor are Python based, and have been tested on Ubuntu Linux and Windows OS.
 
-Delilah and Delilah Monitor are Python based and will run on operating systems that supports Python. Delilah and Deililah Monitor have been tested on Ubuntu Linux and Windows OSes.
+Delilah was inspired by Jordan Wrightâ€™s Elastichoney [^2].
 
-For more information about the DDoS botnet associated with the attacks that leverage the Elasticsearch vulnerability and how Delilah was used in determining the behavior of the actors behind these attacks, please visit the following URL: http://www.novetta.com/library/downloads/#NTRG.
- 
-
-Installation
-------------
+## Installation
 
 Delilah has only a few external dependencies. The following packages are required in order for Delilah and the Delilah Monitor to operate:
 
-* sqlite3
+* sqlite3 (apt install -y sqlite3)
 * tornado (pip install tornado)
 * requests (pip install requests)
 
@@ -73,8 +72,10 @@ python DelilahMonitor.py
 
 Note that Delilah Monitor has no authentication mechanism. Simply navigating to the IP address and port (as specified by the "port:" entry of [webui]) of the Delilah Monitor instance will display the events of all configured sensors. It is recommended that the Delilah Monitor be run locally or be bound to a loopback device, but never exposed directly to the Internet to avoid exposing your sensor network.
 
-Licensing
----------
+## License
 
 Delilah and Delilah Monitor are licensed under the Apache v2 license.
 
+## References
+[^1]: MITRE CVE - CVE-2015-1427, [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1427](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1427). Accessed on 05/14/2022.
+[^2]: jordan-wright/elastichoney: A Simple Elasticsearch Honeypot, [https://github.com/jordan-wright/elastichoney](https://github.com/jordan-wright/elastichoney). Accessed on 05/14/2022.
