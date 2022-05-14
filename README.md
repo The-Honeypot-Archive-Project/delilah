@@ -70,9 +70,9 @@ screen -r monitor
 
 ## Exploiting CVE-2015-1427
 
-To test the setup is working you can try the HTTP query specified in [^3], replacing the server address with the IP address of the honeypot, and the command with a command to execute. If the attempt was successful, Dalilah Monitor will show the attempt in the web as shown below:
+To test the setup is working you can try the HTTP query specified in [^3], replacing the server address with the IP address of the honeypot, and the command with a command to execute. If the attempt was successful, Delilah Monitor will show the attempt in the web as shown below:
 
-![dalilah-monitor-example-1](https://user-images.githubusercontent.com/2458879/168423981-6f4fa44e-1a11-4c73-b8be-43a9abbb4ab0.png)
+![delilah-monitor-example-1](https://user-images.githubusercontent.com/2458879/168423981-6f4fa44e-1a11-4c73-b8be-43a9abbb4ab0.png)
 
 
 ## License
