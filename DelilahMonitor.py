@@ -49,7 +49,10 @@ class sensorMonitor:
 
             # get the sensor list
             sensorList = self.config.get("sensors", "sensor")
-            sensorList.remove("")
+            try:
+                sensorList.remove("")
+            except:
+                pass
             sensors = {}
             for sensor in sensorList:
                 sensors[sensor] = {"ip": self.config.get(sensor, "ip")[0],
