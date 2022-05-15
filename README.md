@@ -1,5 +1,5 @@
 # Delilah Honeypot (originally by Novetta)
-[![Docker Image CI](https://github.com/verovaleros/honeypot_delilah/actions/workflows/docker-image.yml/badge.svg)](https://github.com/stratosphereips/netflowlabeler/actions/workflows/docker-image.yml)
+[![Docker Image CI](https://github.com/verovaleros/honeypot_delilah/actions/workflows/docker-image.yml/badge.svg)](https://github.com/verovaleros/honeypot_delilah/actions/workflows/docker-image.yml)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/verovaleros/honeypot_delilah)
 ![GitHub last commit (branch)](https://img.shields.io/badge/python-3.8.10-brightgreen)
 ![Docker Pulls](https://img.shields.io/docker/pulls/verovaleros/delilah?color=green)
