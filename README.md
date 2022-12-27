@@ -85,6 +85,8 @@ To activate the Delilah Monitor, issue the following command:
 cp DelilahMonitor.template.ini DelilahMonitor.ini
 
 # edit the file with your information
+; IP address of sensor1 without port
+ip: 0.0.0.0
 
 # run delilah monitor in a screen
 screen -d -m -S monitor python3 DelilahMonitor.py
