@@ -26,6 +26,9 @@ The following packages are required in order for Delilah and the Delilah Monitor
 
 ```bash
   apt install -y sqlite3
+  apt install -y python3-pip
+  git clone https://github.com/The-Honeypot-Archive-Project/delilah.git
+  cd delilah/
   pip install -r requirements.txt
 ```
 
