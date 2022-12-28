@@ -1,8 +1,8 @@
 # Delilah Honeypot (originally by Novetta)
-[![Docker Image CI](https://github.com/verovaleros/honeypot_delilah/actions/workflows/docker-image.yml/badge.svg)](https://github.com/verovaleros/honeypot_delilah/actions/workflows/docker-image.yml)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/verovaleros/honeypot_delilah)
+[![Docker Image CI](https://github.com/The-Honeypot-Archive-Project/delilah/actions/workflows/docker-image.yml/badge.svg)](https://github.com/The-Honeypot-Archive-Project/delilah/actions/workflows/docker-image.yml)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/The-Honeypot-Archive-Project/delilah)
 ![GitHub last commit (branch)](https://img.shields.io/badge/python-3.8.10-brightgreen)
-![Docker Pulls](https://img.shields.io/docker/pulls/verovaleros/delilah?color=green)
+![Docker Pulls](https://img.shields.io/docker/pulls/nosqlpot/delilah?color=green)
 
 Delilah is a honeypot designed to attract attackers who are actively exploiting the Elasticsearch Groovy vulnerability (CVE-2015-1427)[^1].
 
@@ -67,7 +67,7 @@ cd honeypot_delilah/
 touch $(pwd)/esevents.sqlite
 
 # run the docker container in daemon mode
-docker container run -d --name honeypotDelilah -v $(pwd)/Delilah.ini:/delilah/Delilah.ini:ro -v $(pwd)/esevents.sqlite:/delilah/esevents.sqlite -p 9200:9200 verovaleros/delilah:latest
+docker container run -d --name honeypotDelilah -v $(pwd)/Delilah.ini:/delilah/Delilah.ini:ro -v $(pwd)/esevents.sqlite:/delilah/esevents.sqlite -p 9200:9200 thehoneypotarchiveproject/delilah:latest
 ```
 
 ## Delilah Monitor
